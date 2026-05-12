@@ -1,14 +1,8 @@
 import { useState, useEffect } from "react";
-import {
-  Alert,
-  Container,
-  Spinner,
-  Row,
-  Col,
-  Card,
-  Button,
-} from "react-bootstrap";
+import { Alert, Container, Spinner, Row, Col, Card } from "react-bootstrap";
 import type { SpaceFlightNews } from "../interfaces/Articolo";
+import dataArticolo from "./dataArticolo";
+import { Link } from "react-router";
 
 const Articoli = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -47,7 +41,7 @@ const Articoli = () => {
       <Row>
         {articoli.map((article) => (
           <Col key={article.id} xs={12} md={6} lg={4} className="mb-4">
-            <Card className="h-100 shadow-sm">
+            <Card className="h-100 shadow-sm" style={{ cursor: "pointer" }}>
               <Card.Img
                 variant="top"
                 src={article.image_url}
@@ -56,16 +50,15 @@ const Articoli = () => {
               <Card.Body className="d-flex flex-column">
                 <Card.Title className="h5">{article.title}</Card.Title>
                 <Card.Text className="text-muted small">
+                  Pubblicato il: {dataArticolo(article.published_at)} -
                   {article.summary.substring(0, 150)}...
                 </Card.Text>
-                <Button
-                  variant="outline-primary"
-                  href={article.url}
-                  target="_blank"
-                  className="mt-auto"
+                <Link
+                  to={`/dettaglio/${article.id}`}
+                  className="btn btn-outline-primary mt-auto"
                 >
                   Leggi di più
-                </Button>
+                </Link>
               </Card.Body>
             </Card>
           </Col>
