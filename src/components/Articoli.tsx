@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Alert, Container, Spinner, Row, Col, Card } from "react-bootstrap";
 import type { SpaceFlightNews } from "../interfaces/Articolo";
-import dataArticolo from "./dataArticolo";
+import DataArticolo from "./dataArticolo";
 import { Link } from "react-router";
 
 const Articoli = () => {
@@ -36,12 +36,15 @@ const Articoli = () => {
   if (error) return <Alert variant="danger">Errore!</Alert>;
 
   return (
-    <Container>
-      <h1>Missioni spaziali!</h1>
+    <Container className="text-center pt-3">
+      <h1 className="mb-5">Missioni spaziali!</h1>
       <Row>
         {articoli.map((article) => (
-          <Col key={article.id} xs={12} md={6} lg={4} className="mb-4">
-            <Card className="h-100 shadow-sm" style={{ cursor: "pointer" }}>
+          <Col key={article.id} xs={12} md={6} lg={4} className=" mb-4">
+            <Card
+              className="h-100 shadow-sm space-card space-text "
+              style={{ cursor: "pointer" }}
+            >
               <Card.Img
                 variant="top"
                 src={article.image_url}
@@ -49,13 +52,14 @@ const Articoli = () => {
               />
               <Card.Body className="d-flex flex-column">
                 <Card.Title className="h5">{article.title}</Card.Title>
-                <Card.Text className="text-muted small">
-                  Pubblicato il: {dataArticolo(article.published_at)} -
+                <Card.Text className="text-muted small space-text2">
+                  Pubblicato il: {DataArticolo(article.published_at)} -
                   {article.summary.substring(0, 150)}...
                 </Card.Text>
                 <Link
                   to={`/dettaglio/${article.id}`}
-                  className="btn btn-outline-primary mt-auto"
+                  className="btn mt-auto"
+                  style={{ border: "1px solid #00ff41" }}
                 >
                   Leggi di più
                 </Link>

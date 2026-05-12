@@ -5,7 +5,7 @@ import { Spinner, Alert, Container } from "react-bootstrap";
 
 const DettaglioArticolo = () => {
   const { id } = useParams<{ id: string }>();
-  const [articolo, setArticolo] = useState<SpaceFlightNews>(null);
+  const [articolo, setArticolo] = useState<SpaceFlightNews | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -33,17 +33,17 @@ const DettaglioArticolo = () => {
         <span className="visually-hidden">Loading...</span>
       </Spinner>
     );
-  if (error) return <Alert variant="danger">Errore!</Alert>;
+  if (error || !articolo) return <Alert variant="danger">Errore!</Alert>;
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-5 min-vh-100">
       <h1>{articolo.title}</h1>
       <img
         src={articolo.image_url}
         alt={articolo.title}
         className="img-fluid my-4"
       />
-      <p className="lead">{articolo.summary}</p>
+      <p className="lead space-text2">{articolo.summary}</p>
       <p>Fonte: {articolo.news_site}</p>
     </Container>
   );

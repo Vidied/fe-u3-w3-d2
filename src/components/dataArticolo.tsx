@@ -1,4 +1,4 @@
-const dataArticolo = (data: string) => {
+const DataArticolo = (data: string) => {
   const date = new Date(data);
   return new Intl.DateTimeFormat("it-IT", {
     day: "2-digit",
@@ -7,4 +7,4 @@ const dataArticolo = (data: string) => {
   }).format(date);
 };
 
-export default dataArticolo;
+export default DataArticolo;
